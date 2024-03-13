@@ -1,0 +1,5 @@
+New Optimizely Project
+
+Document Automation in the Cloud
+DDPs are collections of documents that can be customized and combined based on business logic.
+No longer add reports on the same screen --- > out of the box reports
