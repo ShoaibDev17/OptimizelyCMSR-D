@@ -9,7 +9,7 @@ namespace Optimizely_Project.Controllers
 {
     [TemplateDescriptor(AvailableWithoutTag = true,
                        Default = true,
-                       ModelType = typeof(EPiFormWithTwoColumnOptionBlock),
+                       ModelType = typeof(EPiFormWithTwoColumnOptionBlockAgain),
                        TemplateTypeCategory = TemplateTypeCategories.MvcPartialController)]
     public class EPiFormWithTwoColumnOptionBlockController : FormContainerBlockController
     {

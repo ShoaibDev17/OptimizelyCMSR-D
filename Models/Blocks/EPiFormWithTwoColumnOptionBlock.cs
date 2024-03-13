@@ -10,7 +10,7 @@ namespace Optimizely_Project.Models.Blocks
         GroupName = EPiServer.Forms.Constants.FormElementGroup_Container,
         Order = 4000)]
     [ServiceConfiguration(typeof(IFormContainerBlock))]
-    public class EPiFormWithTwoColumnOptionBlock : FormContainerBlock
+    public class EPiFormWithTwoColumnOptionBlockAgain : FormContainerBlock
     {
         [Display(Name = "Use two column layout", Order = 1, GroupName = SystemTabNames.Content)]
         public virtual bool HasTwoColumns { get; set; }
