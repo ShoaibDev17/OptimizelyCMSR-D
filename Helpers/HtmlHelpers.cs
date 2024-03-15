@@ -7,6 +7,13 @@ using EPiServer.Web.Routing;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using EPiServer.Data.Entity;
+using EPiServer.Forms.Core;
+using EPiServer.Forms.Implementation.Elements;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Collections.Generic;
+using EPiServer.Forms.Core.Models;
+using Optimizely_Project.Business.Rendering;
 
 namespace Optimizely_Project.Helpers;
 
@@ -24,6 +31,8 @@ public static class HtmlHelpers
     /// <remarks>
     /// Filter by access rights and publication status.
     /// </remarks>
+    /// 
+
     public static IHtmlContent MenuList(
         this IHtmlHelper helper,
         ContentReference rootLink,
@@ -187,6 +196,70 @@ public static class HtmlHelpers
             {
                 _viewContext.Writer.Write("</a>");
             }
+        }
+    }
+
+
+
+    ///
+    /// Renders form elements
+    ///
+    ///Instance of HtmlHelper class
+    ///Form element collection
+    public static void RenderFormElements(this HtmlHelper html, int currentStepIndex, IEnumerable<Form> elements)
+    {
+        var _formContenAreaRender = ServiceLocator.Current.GetInstance<FormContentAreaRender>();
+        FormContainerBlock model = (FormContainerBlock)html.ViewData.Model;
+        if (model == null)
+        {
+            return;
+        }
+        /// TODO: calculate element width and group elements into rows
+        /// We use rows to keep the layout unbroken since elements have different heights
+        int rowWidthState = 0;
+        var elementsInfos = elements.Select(element =>
+        {
+            var areaItem = model.ElementsArea.Items.FirstOrDefault(i => i.ContentLink == element.SourceContent.ContentLink);
+            var columnWidth = _formContenAreaRender.GetColumnWidth(html, areaItem);
+            rowWidthState += columnWidth;
+            return new
+            {
+                ContentAreaItem = areaItem,
+                RowNumber = rowWidthState % 12 == 0 ? rowWidthState / 12 - 1 : rowWidthState / 12
+            };
+        });
+
+        var rows = elementsInfos.GroupBy(a => a.RowNumber, a => a.ContentAreaItem);
+        foreach (var row in rows)
+        {
+            // start of new row
+            html.ViewContext.Writer.Write("<div class=\"row row-" + row.Key + "\">");
+            foreach (var item in row)
+            {
+                IContent content = item.GetContent();
+                if (content == null || content.IsDeleted)
+                {
+                    continue;
+                }
+                var cssClasses = _formContenAreaRender.GetItemCssClass(html, item);
+                // start of conten area item
+                html.ViewContext.Writer.Write($"<div class=\"{cssClasses}\">");
+
+                if (content is ISubmissionAwareElement)
+                {
+                    var submissionAwareElement = (content as IReadOnly).CreateWritableClone() as IContent;
+                    (submissionAwareElement as ISubmissionAwareElement).FormSubmissionId = html.ViewBag.FormSubmissionId;
+                    html.RenderContentData(submissionAwareElement, false);
+                }
+                else
+                {
+                    html.RenderContentData(content, false);
+                }
+                // end of content area item
+                html.ViewContext.Writer.Write("</div>");
+            }
+            // end of row
+            html.ViewContext.Writer.Write("</div>");
         }
     }
 }

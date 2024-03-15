@@ -50,12 +50,28 @@ public class Globals
         public const string HalfWidth = "half";
         public const string NarrowWidth = "narrow";
         public const string NoRenderer = "norenderer";
+        public const string ThirdQuaterWidth = "norenderer";
+        public const string TwoThirdsWidth = "norenderer";
+        public const string OneThirdWidth = "norenderer";
+        public const string OneQuaterWidth = "norenderer";
     }
+	public static class FormTags
+	{
+		public const string FullWidth = "FullWidth";
+		public const string WideWidth = "wide";
+		public const string HalfWidth = "HalfWidth";
+		public const string NarrowWidth = "NarrowWidth";
+		public const string NoRenderer = "NoRenderer";
+		public const string ThirdQuaterWidth = "ThirdQuaterWidth";
+		public const string TwoThirdsWidth = "TwoThirdsWidth";
+		public const string OneThirdWidth = "OneThirdWidth";
+		public const string OneQuaterWidth = "OneQuaterWidth";
+	}
 
-    /// <summary>
-    /// Names used for UIHint attributes to map specific rendering controls to page properties
-    /// </summary>
-    public static class SiteUIHints
+	/// <summary>
+	/// Names used for UIHint attributes to map specific rendering controls to page properties
+	/// </summary>
+	public static class SiteUIHints
     {
         public const string Contact = "contact";
         public const string Strings = "StringList";

@@ -41,6 +41,17 @@ namespace Optimizely_Project.Controllers
 			EPiServer.Security.AccessLevel.Read);
 			return RedirectToAction("Index");
 		}
-	}
+		[Route("GetFaqitems")]
+        [HttpGet]
+        public IEnumerable<FAQItemPage> GetFaqitems(FAQListPage currentPage)
+        {
+            PageViewModel<FAQListPage> viewmodel =
+            PageViewModel.Create(currentPage);
+            IEnumerable<FAQItemPage> faqs = repo.GetChildren<FAQItemPage>(
+            currentPage.ContentLink);
+			return faqs;
+
+        }
+    }
 
 }

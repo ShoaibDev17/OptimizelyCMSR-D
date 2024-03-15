@@ -3,6 +3,8 @@ using Optimizely_Project.Models.ViewModels;
 using EPiServer.Web;
 using EPiServer.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
+using EPiServer.Forms.Implementation.Elements;
+using Optimizely_Project.Models.Blocks;
 
 namespace Optimizely_Project.Controllers;
 
@@ -23,8 +25,8 @@ public class StartPageController : PageControllerBase<StartPage>
             editHints.AddConnection(m => m.Layout.NewsPages, p => p.NewsPageLinks);
             editHints.AddConnection(m => m.Layout.CustomerZonePages, p => p.CustomerZonePageLinks);
         }
-		//Throwing exception to test 500 Error Page
-		//throw new NotImplementedException();
-		return View(model);
+        //Throwing exception to test 500 Error Page
+        //throw new NotImplementedException();
+        return View(model);
     }
 }
