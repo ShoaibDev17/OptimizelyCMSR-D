@@ -49,7 +49,7 @@ public class Startup
         //For controller base logic using in Error 500 Controller
         services.AddControllersWithViews();
 
-        services.Configure<DisplayOptions>(options => {
+        options.Add("full", "/displayoptions/full", Globals.FormDisplayOptionTags.FullWidth, "", "epi-icon__layout--full")
             options
               .Add("FullWidth", "/displayoptions/FullWidth", Globals.FormTags.FullWidth, "", "epi-icon__layout--full")
               .Add("WideWidth", "/displayoptions/WideWidth", Globals.FormTags.WideWidth, "", "epi-icon__layout--two-thirds")

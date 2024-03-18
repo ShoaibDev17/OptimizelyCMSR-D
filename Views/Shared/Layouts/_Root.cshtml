@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="~/css/theme.min.css" />
     <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <required-client-resources area="Header" />
+    @Html.RequiredClientResources("Header")
+   
 </head>
 
 <body>
@@ -50,6 +52,7 @@
         await Html.RenderPartialAsync("Footer", Model);
     }
     <required-client-resources area="Footer" />
-    <script src="~/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/bootstrap.bundle.min.js"></script>
+	<script src="~/clientresources/scripts/customformactor.js"></script>
 </body>
 </html>

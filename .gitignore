@@ -21,3 +21,5 @@ modules/
 thumbs.db
 ehthumbs.db
 desktop.ini
+/wwwroot/Util/EPiServer.Forms/EPiServerForms.css
+/wwwroot/Util/EPiServer.Forms/EPiServerForms.less
