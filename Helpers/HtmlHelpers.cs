@@ -198,15 +198,13 @@ public static class HtmlHelpers
             }
         }
     }
-
-
-
-    ///
-    /// Renders form elements
-    ///
-    ///Instance of HtmlHelper class
-    ///Form element collection
-    public static void RenderFormElements(this HtmlHelper html, int currentStepIndex, IEnumerable<Form> elements)
+    /// <summary>
+    /// RenderFormElements
+    /// </summary>
+    /// <param name="html"></param>
+    /// <param name="currentStepIndex"></param>
+    /// <param name="elements"></param>
+    public static void RenderFormElements(this HtmlHelper html, int currentStepIndex, IEnumerable<IFormElement> elements)
     {
         var _formContenAreaRender = ServiceLocator.Current.GetInstance<FormContentAreaRender>();
         FormContainerBlock model = (FormContainerBlock)html.ViewData.Model;
@@ -219,6 +217,7 @@ public static class HtmlHelpers
         int rowWidthState = 0;
         var elementsInfos = elements.Select(element =>
         {
+
             var areaItem = model.ElementsArea.Items.FirstOrDefault(i => i.ContentLink == element.SourceContent.ContentLink);
             var columnWidth = _formContenAreaRender.GetColumnWidth(html, areaItem);
             rowWidthState += columnWidth;
@@ -243,6 +242,7 @@ public static class HtmlHelpers
                 }
                 var cssClasses = _formContenAreaRender.GetItemCssClass(html, item);
                 // start of conten area item
+
                 html.ViewContext.Writer.Write($"<div class=\"{cssClasses}\">");
 
                 if (content is ISubmissionAwareElement)

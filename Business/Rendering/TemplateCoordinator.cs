@@ -37,12 +37,12 @@ public class TemplateCoordinator : IViewTemplateModelRegistrator
     /// </remarks>
     public void Register(TemplateModelCollection viewTemplateModelRegistrator)
     {
-        viewTemplateModelRegistrator.Add(typeof(TeaserBlock), new TemplateModel
-        {
-            Name = "TeaserBlockWide",
-            Tags = [Globals.ContentAreaTags.WideWidth, Globals.ContentAreaTags.FullWidth],
-            AvailableWithoutTag = false,
-        });
+        //viewTemplateModelRegistrator.Add(typeof(TeaserBlock), new TemplateModel
+        //{
+        //    Name = "TeaserBlockWide",
+        //    Tags = [Globals.ContentAreaTags.WideWidth, Globals.ContentAreaTags.FullWidth],
+        //    AvailableWithoutTag = false,
+        //});
 
         viewTemplateModelRegistrator.Add(typeof(SitePageData), new TemplateModel
         {
@@ -52,23 +52,23 @@ public class TemplateCoordinator : IViewTemplateModelRegistrator
             Path = PagePartialPath("Page.cshtml")
         });
 
-        viewTemplateModelRegistrator.Add(typeof(SitePageData), new TemplateModel
-        {
-            Name = "PageWide",
-            Inherit = true,
-            Tags = [Globals.ContentAreaTags.WideWidth, Globals.ContentAreaTags.FullWidth],
-            AvailableWithoutTag = false,
-            Path = PagePartialPath("PageWide.cshtml")
-        });
+        //viewTemplateModelRegistrator.Add(typeof(SitePageData), new TemplateModel
+        //{
+        //    Name = "PageWide",
+        //    Inherit = true,
+        //    Tags = [Globals.ContentAreaTags.WideWidth, Globals.ContentAreaTags.FullWidth],
+        //    AvailableWithoutTag = false,
+        //    Path = PagePartialPath("PageWide.cshtml")
+        //});
 
-        viewTemplateModelRegistrator.Add(typeof(IContentData), new TemplateModel
-        {
-            Name = "NoRenderer",
-            Inherit = true,
-            Tags = [Globals.ContentAreaTags.NoRenderer],
-            AvailableWithoutTag = false,
-            Path = BlockPath("NoRenderer.cshtml")
-        });
+        //viewTemplateModelRegistrator.Add(typeof(IContentData), new TemplateModel
+        //{
+        //    Name = "NoRenderer",
+        //    Inherit = true,
+        //    Tags = [Globals.ContentAreaTags.NoRenderer],
+        //    AvailableWithoutTag = false,
+        //    Path = BlockPath("NoRenderer.cshtml")
+        //});
     }
 
     private static string BlockPath(string fileName) => $"{BlockFolder}{fileName}";

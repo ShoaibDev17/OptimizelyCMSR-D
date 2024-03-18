@@ -9,8 +9,8 @@
 			app.UseExceptionHandler("/500Error");
 
 			//Use when want to Display 500 Internal Server Error from CMS Controller Action.
-			app.UseStatusCodePagesWithReExecute("/ErrorPage/500Error");
-			app.UseExceptionHandler("/ErrorPage/500Error");
+			//app.UseStatusCodePagesWithReExecute("/ErrorPage/500Error");
+			//app.UseExceptionHandler("/ErrorPage/500Error");
 
 			return app.Use(async (ctx, next) =>
 			{

@@ -27,10 +27,33 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="wwwroot\NewFolder\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Content Remove="Views\500.cshtml" />
   </ItemGroup>
   
   <ItemGroup>
+    <Content Include="modules\_protected\EPiServer.Forms\EPiServer.Forms\5.8.0\ClientResources\ViewMode\EPiServerForms.css" />
+    <Content Include="modules\_protected\EPiServer.Forms\EPiServer.Forms\5.8.0\ClientResources\ViewMode\EPiServerForms.less" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Include="wwwroot\Index.html" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="wwwroot\Util\EPiServer.Forms\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="modules\_protected\EPiServer.Forms\EPiServer.Forms\Views\ElementBlocks\Components\FormContainerBlock\FormContainerBlock.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 </Project>

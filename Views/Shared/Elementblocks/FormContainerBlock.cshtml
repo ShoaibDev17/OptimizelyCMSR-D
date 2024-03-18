@@ -4,18 +4,19 @@
     ====================================
 *@
 
+@using EPiServer.Forms.EditView.Internal
 @using EPiServer.ServiceLocation
 @using EPiServer.Forms
 @using EPiServer.Forms.Core
 @using EPiServer.Forms.Core.Internal
 @using EPiServer.Forms.Helpers.Internal
-@using EPiServer.Forms.EditView.Internal
+@using Optimizely_Project.Helpers
 @using EPiServer.Forms.Implementation.Elements
 @using EPiServer.Web.Mvc.Html
 @using EPiServer.Web
 @using EPiServer.Shell.Web.Mvc.Html
 
-@model Optimizely_Project.Models.Blocks.MultiRazorView
+@model EPiServer.Forms.Implementation.Elements.FormContainerBlock
 
 @{
     var dataSubmissionService = ServiceLocator.Current.GetInstance<DataSubmissionService>();
@@ -23,19 +24,14 @@
     var currentMode = ServiceLocator.Current.GetInstance<IContextModeResolver>().CurrentMode;
     var formTitleId = Model.Form.FormGuid + "_label";
 }
-
+<h1>I am Form Container Block.cshtml</h1>
 @{
     async void RenderFormBody()
     {
         var statusDisplay = "hide";
         var message = ViewBag.Message;
         var submissionWarning = ViewBag.IsSuccess is not null && !ViewBag.IsSuccess;
-        if (Model.HasTwoColumns){
-            <h1>Has Two Columns is activated</h1>
-            @await Html.PartialAsync("~/Views/Shared/NumberElementBlock.cshtml");
-            @await Html.PartialAsync("~/Views/Shared/TextboxElementBlock.cshtml");
-
-        }
+       
         if (!ViewBag.IsWorkingInNonJSMode)
         {
             @await Html.PartialAsync("FormContainerInitScript", Model)
@@ -99,7 +95,7 @@
                 <section id="@step.value.ElementName" data-f-type="step" data-f-element-name="@step.value.ElementName" class="Form__Element FormStep Form__Element--NonData @stepDisplaying" data-f-stepindex="@step.i" data-f-element-nondata>
                     @if (stepBlock != null)
                     {
-                        Html.RenderContentData(step.value.SourceContent, false);
+                         Html.RenderContentData(step.value.SourceContent, false);
                     }
                     <!-- Each FormStep groups the elements below it til the next FormStep -->
                     @{
@@ -169,7 +165,7 @@
 
 @if (currentMode == ContextMode.Edit)
 {
-    <link rel="stylesheet" type="text/css" data-f-resource="EPiServerForms.css" href='@EPiServer.Shell.Paths.ToClientResource(typeof(FormsModule), "ClientResources/ViewMode/EPiServerForms.css")' />
+    // <link rel="stylesheet" type="text/css" data-f-resource="EPiServerForms.css" href='@EPiServer.Shell.Paths.ToClientResource(typeof(FormsModule), "ClientResources/ViewMode/EPiServerForms.css")' />
 
     @if (Model.Form != null)
     {
@@ -178,6 +174,7 @@
             <h4 class="Form__Description">@Html.PropertyFor(m => m.Description)</h4>
             @*NOTE: This temporary fix will prevent inheritance RenderSettings.Tag(e.g.: span12) from the parent view
                 which may break our form container block in Edit mode. *@
+                
             @Html.PropertyFor(m => m.ElementsArea, new {Tag = ""})
         </div>
     }

@@ -7,6 +7,8 @@ using EPiServer.Web.Routing;
 using Stott.Optimizely.RobotsHandler.Configuration;
 using Optimizely_Project.Middleware;
 using EPiServer.Web;
+using EPiServer.Forms;
+using EPiServer.Framework.Web.Resources;
 
 namespace Optimizely_Project;
 
@@ -49,25 +51,26 @@ public class Startup
         //For controller base logic using in Error 500 Controller
         services.AddControllersWithViews();
 
-        options.Add("full", "/displayoptions/full", Globals.FormDisplayOptionTags.FullWidth, "", "epi-icon__layout--full")
-            options
-              .Add("FullWidth", "/displayoptions/FullWidth", Globals.FormTags.FullWidth, "", "epi-icon__layout--full")
-              .Add("WideWidth", "/displayoptions/WideWidth", Globals.FormTags.WideWidth, "", "epi-icon__layout--two-thirds")
-              .Add("HalfWidth", "/displayoptions/HalfWidth", Globals.FormTags.HalfWidth, "", "epi-icon__layout--one-third")
-              .Add("NarrowWidth", "/displayoptions/NarrowWidth", Globals.FormTags.NarrowWidth, "", "epi-icon__layout--one-third")
-              .Add("NoRenderer", "/displayoptions/NoRenderer", Globals.FormTags.NoRenderer, "", "epi-icon__layout--one-third")
-              .Add("ThirdQuaterWidth", "/displayoptions/ThirdQuaterWidth", Globals.FormTags.ThirdQuaterWidth, "", "epi-icon__layout--one-third")
-              .Add("TwoThirdsWidth", "/displayoptions/TwoThirdsWidth", Globals.FormTags.TwoThirdsWidth, "", "epi-icon__layout--one-third")
-              .Add("OneQuaterWidth", "/displayoptions/OneQuaterWidth", Globals.FormTags.OneQuaterWidth, "", "epi-icon__layout--one-third");
+        //var options = ServiceLocator.Current.GetInstance<DisplayOption>(); // Specify the type parameter
+
+
+        services.Configure<DisplayOptions>(options =>
+        {
+
+            options.Add("full", "/displayoptions/full", Globals.ContentAreaTags.FullWidth, "", "epi-icon__layout--full")
+               .Add("wide", "/displayoptions/wide", Globals.ContentAreaTags.TwoThirdsWidth, "", "epi-icon__layout--two-thirds")
+               .Add("narrow", "/displayoptions/narrow", Globals.ContentAreaTags.OneThirdWidth, "", "epi-icon__layout--one-third");
         });
+
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //For redirecting in case of 500 and 404 Error Page.
-		app.UsePageRedirectionMiddleware();
-		app.UseHttpsRedirection();
-		app.UseDetection();
+        app.UsePageRedirectionMiddleware();
+        app.UseHttpsRedirection();
+        app.UseDetection();
         app.UseSession();
 
         app.UseStaticFiles();
@@ -76,11 +79,11 @@ public class Startup
         app.UseAuthorization();
 
         //For controller base logic using in Error 500 Controller
-		app.UseEndpoints(endpoints =>
+        app.UseEndpoints(endpoints =>
         {
-			endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
-			endpoints.MapContent();
+            endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapContent();
         });
 
-	}
+    }
 }
