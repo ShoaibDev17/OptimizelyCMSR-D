@@ -51,9 +51,6 @@ public class Startup
         //For controller base logic using in Error 500 Controller
         //services.AddControllersWithViews();
 
-        //var options = ServiceLocator.Current.GetInstance<DisplayOption>(); // Specify the type parameter
-
-
         services.Configure<DisplayOptions>(options =>
         {
 
@@ -61,8 +58,6 @@ public class Startup
                .Add("wide", "/displayoptions/wide", Globals.ContentAreaTags.TwoThirdsWidth, "", "epi-icon__layout--two-thirds")
                .Add("narrow", "/displayoptions/narrow", Globals.ContentAreaTags.OneThirdWidth, "", "epi-icon__layout--one-third");
         });
-
-
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
