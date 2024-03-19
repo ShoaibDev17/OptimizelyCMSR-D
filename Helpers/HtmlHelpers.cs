@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System.Collections.Generic;
 using EPiServer.Forms.Core.Models;
 using Optimizely_Project.Business.Rendering;
+using EPiServer.Forms.Internal.Security;
 
 namespace Optimizely_Project.Helpers;
 
@@ -204,7 +205,7 @@ public static class HtmlHelpers
     /// <param name="html"></param>
     /// <param name="currentStepIndex"></param>
     /// <param name="elements"></param>
-    public static void RenderFormElements(this HtmlHelper html, int currentStepIndex, IEnumerable<IFormElement> elements)
+    public static void RenderForm(this IHtmlHelper html,  int currentStepIndex, IEnumerable<IFormElement> elements)
     {
         var _formContenAreaRender = ServiceLocator.Current.GetInstance<FormContentAreaRender>();
         FormContainerBlock model = (FormContainerBlock)html.ViewData.Model;
@@ -219,7 +220,7 @@ public static class HtmlHelpers
         {
 
             var areaItem = model.ElementsArea.Items.FirstOrDefault(i => i.ContentLink == element.SourceContent.ContentLink);
-            var columnWidth = _formContenAreaRender.GetColumnWidth(html, areaItem);
+            var columnWidth = _formContenAreaRender.GetColumnWidth((HtmlHelper)html, areaItem);
             rowWidthState += columnWidth;
             return new
             {
@@ -240,7 +241,7 @@ public static class HtmlHelpers
                 {
                     continue;
                 }
-                var cssClasses = _formContenAreaRender.GetItemCssClass(html, item);
+                var cssClasses = _formContenAreaRender.GetItemCssClass((HtmlHelper)html, item);
                 // start of conten area item
 
                 html.ViewContext.Writer.Write($"<div class=\"{cssClasses}\">");

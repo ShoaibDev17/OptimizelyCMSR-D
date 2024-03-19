@@ -1,0 +1,10 @@
+﻿@using EPiServer.Forms.Core.Models
+@using Optimizely_Project.Helpers;
+@using EPiServer.Web.Mvc.Html
+@using EPiServer.Web
+@using EPiServer.Shell.Web.Mvc.Html
+
+@{
+	int step = (int)ViewData["Step"];
+	IEnumerable<IFormElement> elements = ViewData["Elements"] as IEnumerable<IFormElement>;
+}

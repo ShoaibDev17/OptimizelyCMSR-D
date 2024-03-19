@@ -1,18 +1,19 @@
 ﻿using EPiServer.Forms.Core;
 using EPiServer.Forms.Implementation.Elements;
 using EPiServer.ServiceLocation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Optimizely_Project.Models.Blocks
 {
-    [ContentType(DisplayName = "Custom Standard Container",
-    GUID = "c24ead35-a13d-478a-ac15-941e74bd7bc0",
-    Description = "Custom form Episerver.",
-    GroupName = EPiServer.Forms.Constants.FormElementGroup_Container)]
+    [ContentType(GUID = "{769ad345-6899-45e9-9300-2ac52ebdf199}", GroupName = EPiServer.Forms.Constants.FormElementGroup_Container, Order = 4000)]
     [ServiceConfiguration(typeof(IFormContainerBlock))]
-
-    [ImageUrl("~/resources/icons/custom-form-block.jpg")]
     public class CustomFormContainerBlock : FormContainerBlock
     {
-        public virtual string CustomName { get;set; }
+        [Display(Name = "Form Display Option Layout", Order = 1, GroupName = SystemTabNames.Content)]
+        public virtual bool HasTwoColumns
+        {
+            get;
+            set;
+        }
     }
 }

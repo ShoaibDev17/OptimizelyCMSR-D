@@ -47,13 +47,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Folder Include="modules\_protected\EPiServer.Forms\EPiServer.Forms\Views\ElementBlocks\Components\CustomFormContainerBlock\" />
     <Folder Include="wwwroot\Util\EPiServer.Forms\" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Content Update="modules\_protected\EPiServer.Forms\EPiServer.Forms\Views\ElementBlocks\Components\FormContainerBlock\FormContainerBlock.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
   </ItemGroup>
 </Project>

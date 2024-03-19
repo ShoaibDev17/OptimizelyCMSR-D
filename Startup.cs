@@ -49,7 +49,7 @@ public class Startup
         //For robot.txt handler using Optimizely third party tools. Scotts Optimizely Robot Handlers
         services.AddRobotsHandler();
         //For controller base logic using in Error 500 Controller
-        services.AddControllersWithViews();
+        //services.AddControllersWithViews();
 
         //var options = ServiceLocator.Current.GetInstance<DisplayOption>(); // Specify the type parameter
 
@@ -68,8 +68,8 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //For redirecting in case of 500 and 404 Error Page.
-        app.UsePageRedirectionMiddleware();
-        app.UseHttpsRedirection();
+        //app.UsePageRedirectionMiddleware();
+        //app.UseHttpsRedirection();
         app.UseDetection();
         app.UseSession();
 
@@ -81,7 +81,7 @@ public class Startup
         //For controller base logic using in Error 500 Controller
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+            //endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
             endpoints.MapContent();
         });
 
